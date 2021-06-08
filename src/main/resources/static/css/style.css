@@ -1,0 +1,18 @@
+body{
+	/*background:red !important;*/
+}
+span.error{
+	color:red !important
+}
+
+.ck.ck-content{
+	height:150px;
+}
+div.productAdded {
+    position: absolute;
+    bottom: 5px;
+    left: 110px;
+}
+.hide{
+	display:none
+}

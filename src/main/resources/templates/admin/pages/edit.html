@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="fragments/head"></head>
+  <body>
+ 
+    <nav th:replace="fragments/nav :: nav-admin"></nav>
+ 
+  <div class="container mt-4">
+        <h1 class="display-2" th:text="Edit +${page.title}">Edit a page</h1>
+        
+  </div>
+ 
+  <div class="container">
+  
+  <a href="/admin/pages" class="btn btn-primary mb-5">Back to Page</a>
+  
+  <div th:if="${message}" th:text="${message}" th:class="${'alert' + alertclass}"></div>
+  
+  <form method="post" th:object="${page}" th:action="@{/admin/pages/edit}">
+  
+  	<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+  	There is error in the field.
+  	</div>
+  	
+  	<div class="form-group">
+  	<label for="">Title</label>
+  	<input type="text" class="form-control" th:field="*{title}" th:value="${page.title}" placeholder="Title">
+  	<span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+  	</div>
+  	
+  	<div class="form-group" th:classappend="${page.slug == 'home'} ? 'd-none' : ''">
+  	<label for="">Slug</label>
+  	<input type="text" class="form-control" th:field="*{slug}" th:value="${page.slug}" placeholder="Title">
+  	</div>
+  	
+  	<div class="form-group">
+  	<label for="">Content</label>
+  	<textarea  th:field="*{content}" class="form-control" th:value="${page.content}" placeholder="Content"></textarea>
+  	<span class="error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+  	</div>
+  
+  
+  <input type="hidden" th:field="*{id}" th:value="${page.id}">
+   <input type="hidden" th:field="*{sorting}" th:value="${page.sorting}">
+  <button  class="btn btn-danger">Edit</button>
+  </form>
+    
+</div>
+   <footer th:replace="fragments/footer"></footer>
+ </body>
+ 
+</html>

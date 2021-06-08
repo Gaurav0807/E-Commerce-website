@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="fragments/head"></head>
+  <body>
+ 
+    <nav th:replace="fragments/nav :: nav-admin"></nav>
+ 
+  <div class="container mt-4">
+        <h1 class="display-2">Admin Pages</h1>
+        <a href="/admin/pages/add" class="btn btn-primary">Add new Page</a>
+  </div>
+ 
+  <div class="container">
+  
+  <h1 class="display-2">Add a Page</h1>
+  <a href="/admin/pages" class="btn btn-primary mb-5">Back to Page</a>
+  
+  <div th:if="${message}" th:text="${message}" th:class="${'alert' + alertclass}"></div>
+  
+  <form method="post" th:object="${page}" th:action="@{/admin/pages/add}">
+  
+  	<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+  	There is error in the field.
+  	</div>
+  	
+  	<div class="form-group">
+  	<label for="">Title</label>
+  	<input type="text" class="form-control" th:field="*{title}" placeholder="Title">
+  	<span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+  	</div>
+  	
+  	<div class="form-group">
+  	<label for="">Slug</label>
+  	<input type="text" class="form-control" th:field="*{slug}" placeholder="Title">
+  	</div>
+  	
+  	<div class="form-group">
+  	<label for="">Content</label>
+  	<textarea  th:field="*{content}" class="form-control" placeholder="Content"></textarea>
+  	<span class="error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+  	</div>
+  
+  <button  class="btn btn-danger">Add</button>
+  </form>
+    
+</div>
+   <footer th:replace="fragments/footer"></footer>
+ </body>
+ 
+</html>

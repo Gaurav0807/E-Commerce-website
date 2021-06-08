@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="fragments/head"></head>
+  <body>
+ 
+    <nav th:replace="fragments/nav :: nav-admin"></nav>
+ 
+ 
+  <div class="container">
+  
+  <h1 class="display-2">Add Product</h1>
+  <a href="/admin/pages" class="btn btn-primary mb-5">Back to Page</a>
+  
+  <div th:if="${message}" th:text="${message}" th:class="${'alert' + alertclass}"></div>
+  
+  <form method="post" th:object="${product}" th:action="@{/admin/product/add}" enctype="multipart/form-data">
+  
+  	<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+  	There is error in the field.
+  	</div>
+  	
+  	<div class="form-group">
+  	<label for="">Name</label>
+  	<input type="text" class="form-control" th:field="*{name}" placeholder="name">
+  	<span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+  	</div>
+  	
+  	<div class="form-group">
+  	<label for="">Description</label>
+  	<textarea  th:field="*{description}" class="form-control" placeholder="Description"></textarea>
+  	<span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+  	</div>
+  	
+  	<div class="form-group">
+  		<label for="">Image</label>
+  		<input type="file" class="form-control" th:name="file">
+  		<img src="#" alt="" id="imgPreview1"> 
+  	</div>
+  	
+  	<div class="form-group">
+  	<label for="">Price</label>
+  	<textarea  th:field="*{price}" class="form-control" placeholder="Product Price"></textarea>
+  	<span class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+  	</div>
+  	
+  	<div class="form-group">
+  	<label for="">Category</label>
+  	<select th:field="*{categoryId}" class="form-control">
+  		<option th:value="0">Choose a category</option>
+  		<option th:each="c: ${category}" th:value="${c.id}" th:text="${c.name}"></option>
+  		</select>
+  		<span class="error" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}"></span>
+  	</div>
+  	
+  	
+  
+  <button  class="btn btn-danger">Add</button>
+  </form>
+    
+</div>
+   <footer th:replace="fragments/footer"></footer>
+ </body>
+ 
+</html>

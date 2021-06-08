@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="fragments/head"></head>
+  <body>
+ 
+    <nav th:replace="fragments/nav :: nav-admin"></nav>
+ 
+  <div class="container mt-4">
+        <h1 class="display-2">Categories</h1>
+        <a href="/admin/category/add" class="btn btn-primary">Add new</a>
+  </div>
+ 
+  <div class="container pt-4">
+    <div th:if=${!category.empty}>
+       <p>There are Category</p>
+    </div>
+ 
+  <div>
+    <table class="table">
+      <tr>
+       <th>Name</th>
+        <th>Delete</th>
+      </tr>
+      
+      <tr th:each="category: ${category}">
+        <td th:text="${category.name}"></td>
+       <!--   <td><a th:href="@{'/admin/category/edit/' + ${category.id}}">Edit</a></td>  -->
+        <td><a  th:href="@{'/admin/category/delete/' + ${category.id}}">Delete</a></td>
+      </tr>
+    </table>
+  </div>
+ 
+  <div th:unless=${!category.empty}>
+      <p>There are no Category</p>
+    </div>
+</div>
+   <footer th:replace="fragments/footer"></footer>
+ </body>
+ 
+</html>
